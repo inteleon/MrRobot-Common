@@ -11,15 +11,15 @@ type Client struct {
 }
 
 // GetChannelsContext provides a mock function with given fields: _a0, _a1
-func (_m *Client) GetChannelsContext(_a0 context.Context, _a1 bool) (*slack.Channel, error) {
+func (_m *Client) GetChannelsContext(_a0 context.Context, _a1 bool) ([]slack.Channel, error) {
 	ret := _m.Called(_a0, _a1)
 
-	var r0 *slack.Channel
-	if rf, ok := ret.Get(0).(func(context.Context, bool) *slack.Channel); ok {
+	var r0 []slack.Channel
+	if rf, ok := ret.Get(0).(func(context.Context, bool) []slack.Channel); ok {
 		r0 = rf(_a0, _a1)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*slack.Channel)
+			r0 = ret.Get(0).([]slack.Channel)
 		}
 	}
 
