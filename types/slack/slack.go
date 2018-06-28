@@ -1,7 +1,6 @@
 package slack
 
 import (
-	"context"
 	"github.com/nlopes/slack"
 )
 
@@ -9,7 +8,6 @@ import (
 type Client interface {
 	OpenIMChannel(string) (bool, bool, string, error)
 	GetUserByEmail(string) (*slack.User, error)
-	JoinChannelContext(context.Context, string) (*slack.Channel, error)
 	SetDebug(bool)
 }
 
