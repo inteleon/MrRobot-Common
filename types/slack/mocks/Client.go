@@ -10,6 +10,29 @@ type Client struct {
 	mock.Mock
 }
 
+// GetChannelInfoContext provides a mock function with given fields: _a0, _a1
+func (_m *Client) GetChannelInfoContext(_a0 context.Context, _a1 string) (*slack.Channel, error) {
+	ret := _m.Called(_a0, _a1)
+
+	var r0 *slack.Channel
+	if rf, ok := ret.Get(0).(func(context.Context, string) *slack.Channel); ok {
+		r0 = rf(_a0, _a1)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*slack.Channel)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
+		r1 = rf(_a0, _a1)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // GetChannelsContext provides a mock function with given fields: _a0, _a1
 func (_m *Client) GetChannelsContext(_a0 context.Context, _a1 bool) ([]slack.Channel, error) {
 	ret := _m.Called(_a0, _a1)

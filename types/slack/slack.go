@@ -10,6 +10,7 @@ type Client interface {
 	OpenIMChannel(string) (bool, bool, string, error)
 	GetUserByEmail(string) (*slack.User, error)
 	GetChannelsContext(context.Context, bool) ([]slack.Channel, error)
+	GetChannelInfoContext(context.Context, string) (*slack.Channel, error)
 	PostMessageContext(context.Context, string, string, slack.PostMessageParameters) (string, string, error)
 	SetDebug(bool)
 }
