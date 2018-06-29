@@ -91,6 +91,34 @@ func (_m *Client) OpenIMChannel(_a0 string) (bool, bool, string, error) {
 	return r0, r1, r2, r3
 }
 
+// PostMessageContext provides a mock function with given fields: _a0, _a1, _a2, _a3
+func (_m *Client) PostMessageContext(_a0 context.Context, _a1 string, _a2 string, _a3 slack.PostMessageParameters) (string, string, error) {
+	ret := _m.Called(_a0, _a1, _a2, _a3)
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, slack.PostMessageParameters) string); ok {
+		r0 = rf(_a0, _a1, _a2, _a3)
+	} else {
+		r0 = ret.Get(0).(string)
+	}
+
+	var r1 string
+	if rf, ok := ret.Get(1).(func(context.Context, string, string, slack.PostMessageParameters) string); ok {
+		r1 = rf(_a0, _a1, _a2, _a3)
+	} else {
+		r1 = ret.Get(1).(string)
+	}
+
+	var r2 error
+	if rf, ok := ret.Get(2).(func(context.Context, string, string, slack.PostMessageParameters) error); ok {
+		r2 = rf(_a0, _a1, _a2, _a3)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
+}
+
 // SetDebug provides a mock function with given fields: _a0
 func (_m *Client) SetDebug(_a0 bool) {
 	_m.Called(_a0)
