@@ -47,7 +47,7 @@ func (_m *RTM) ManageConnection() {
 }
 
 // NewOutgoingMessage provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RTM) NewOutgoingMessage(_a0 string, _a1 string, _a2 ...slack.RTMOption) *slack.OutgoingMessage {
+func (_m *RTM) NewOutgoingMessage(_a0 string, _a1 string, _a2 ...slack.RTMsgOption) *slack.OutgoingMessage {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -58,7 +58,7 @@ func (_m *RTM) NewOutgoingMessage(_a0 string, _a1 string, _a2 ...slack.RTMOption
 	ret := _m.Called(_ca...)
 
 	var r0 *slack.OutgoingMessage
-	if rf, ok := ret.Get(0).(func(string, string, ...slack.RTMOption) *slack.OutgoingMessage); ok {
+	if rf, ok := ret.Get(0).(func(string, string, ...slack.RTMsgOption) *slack.OutgoingMessage); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {

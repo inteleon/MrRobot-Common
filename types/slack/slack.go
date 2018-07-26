@@ -19,7 +19,7 @@ type Client interface {
 type RTM interface {
 	ManageConnection()
 	GetIncomingEvents() chan slack.RTMEvent
-	NewOutgoingMessage(string, string, ...slack.RTMOption) *slack.OutgoingMessage
+	NewOutgoingMessage(string, string, ...slack.RTMsgOption) *slack.OutgoingMessage
 	SendMessage(*slack.OutgoingMessage)
 	GetInfo() *slack.Info
 }
