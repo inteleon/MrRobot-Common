@@ -9,6 +9,7 @@ import (
 type Client interface {
 	OpenIMChannel(string) (bool, bool, string, error)
 	GetUserByEmail(string) (*slack.User, error)
+	GetUserIdentityContext(context.Context) (*slack.UserIdentityResponse, error)
 	GetChannelsContext(context.Context, bool) ([]slack.Channel, error)
 	GetChannelInfoContext(context.Context, string) (*slack.Channel, error)
 	GetConversationInfoContext(context.Context, string, bool) (*slack.Channel, error)
