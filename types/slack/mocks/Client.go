@@ -126,13 +126,13 @@ func (_m *Client) GetUserIdentityContext(_a0 context.Context) (*slack.UserIdenti
 	return r0, r1
 }
 
-// GetUserProfileContext provides a mock function with given fields: _a0, _a1
-func (_m *Client) GetUserProfileContext(_a0 string, _a1 bool) (*slack.UserProfile, error) {
-	ret := _m.Called(_a0, _a1)
+// GetUserProfileContext provides a mock function with given fields: ctx, userId, includeLabels
+func (_m *Client) GetUserProfileContext(ctx context.Context, userId string, includeLabels bool) (*slack.UserProfile, error) {
+	ret := _m.Called(ctx, userId, includeLabels)
 
 	var r0 *slack.UserProfile
-	if rf, ok := ret.Get(0).(func(string, bool) *slack.UserProfile); ok {
-		r0 = rf(_a0, _a1)
+	if rf, ok := ret.Get(0).(func(context.Context, string, bool) *slack.UserProfile); ok {
+		r0 = rf(ctx, userId, includeLabels)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*slack.UserProfile)
@@ -140,8 +140,8 @@ func (_m *Client) GetUserProfileContext(_a0 string, _a1 bool) (*slack.UserProfil
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(string, bool) error); ok {
-		r1 = rf(_a0, _a1)
+	if rf, ok := ret.Get(1).(func(context.Context, string, bool) error); ok {
+		r1 = rf(ctx, userId, includeLabels)
 	} else {
 		r1 = ret.Error(1)
 	}
