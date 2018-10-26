@@ -126,6 +126,29 @@ func (_m *Client) GetUserIdentityContext(_a0 context.Context) (*slack.UserIdenti
 	return r0, r1
 }
 
+// GetUserInfoContext provides a mock function with given fields: ctx, user
+func (_m *Client) GetUserInfoContext(ctx context.Context, user string) (*slack.User, error) {
+	ret := _m.Called(ctx, user)
+
+	var r0 *slack.User
+	if rf, ok := ret.Get(0).(func(context.Context, string) *slack.User); ok {
+		r0 = rf(ctx, user)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*slack.User)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
+		r1 = rf(ctx, user)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // GetUserProfileContext provides a mock function with given fields: ctx, userId, includeLabels
 func (_m *Client) GetUserProfileContext(ctx context.Context, userId string, includeLabels bool) (*slack.UserProfile, error) {
 	ret := _m.Called(ctx, userId, includeLabels)

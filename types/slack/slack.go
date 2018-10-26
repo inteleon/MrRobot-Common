@@ -13,6 +13,7 @@ type Client interface {
 	GetChannelsContext(context.Context, bool) ([]slack.Channel, error)
 	GetChannelInfoContext(context.Context, string) (*slack.Channel, error)
 	GetConversationInfoContext(context.Context, string, bool) (*slack.Channel, error)
+	GetUserInfoContext(ctx context.Context, user string) (*slack.User, error)
 	GetUserProfileContext(ctx context.Context, userId string, includeLabels bool) (*slack.UserProfile, error)
 	PostMessageContext(context.Context, string, string, slack.PostMessageParameters) (string, string, error)
 	SetDebug(bool)
