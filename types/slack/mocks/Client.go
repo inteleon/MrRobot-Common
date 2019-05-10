@@ -34,13 +34,20 @@ func (_m *Client) GetChannelInfoContext(_a0 context.Context, _a1 string) (*slack
 	return r0, r1
 }
 
-// GetChannelsContext provides a mock function with given fields: _a0, _a1
-func (_m *Client) GetChannelsContext(_a0 context.Context, _a1 bool) ([]slack.Channel, error) {
-	ret := _m.Called(_a0, _a1)
+// GetChannelsContext provides a mock function with given fields: _a0, _a1, _a2
+func (_m *Client) GetChannelsContext(_a0 context.Context, _a1 bool, _a2 ...slack.GetChannelsOption) ([]slack.Channel, error) {
+	_va := make([]interface{}, len(_a2))
+	for _i := range _a2 {
+		_va[_i] = _a2[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
 
 	var r0 []slack.Channel
-	if rf, ok := ret.Get(0).(func(context.Context, bool) []slack.Channel); ok {
-		r0 = rf(_a0, _a1)
+	if rf, ok := ret.Get(0).(func(context.Context, bool, ...slack.GetChannelsOption) []slack.Channel); ok {
+		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).([]slack.Channel)
@@ -48,8 +55,8 @@ func (_m *Client) GetChannelsContext(_a0 context.Context, _a1 bool) ([]slack.Cha
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, bool) error); ok {
-		r1 = rf(_a0, _a1)
+	if rf, ok := ret.Get(1).(func(context.Context, bool, ...slack.GetChannelsOption) error); ok {
+		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -207,35 +214,37 @@ func (_m *Client) OpenIMChannel(_a0 string) (bool, bool, string, error) {
 	return r0, r1, r2, r3
 }
 
-// PostMessageContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *Client) PostMessageContext(_a0 context.Context, _a1 string, _a2 string, _a3 slack.PostMessageParameters) (string, string, error) {
-	ret := _m.Called(_a0, _a1, _a2, _a3)
+// PostMessageContext provides a mock function with given fields: _a0, _a1, _a2
+func (_m *Client) PostMessageContext(_a0 context.Context, _a1 string, _a2 ...slack.MsgOption) (string, string, error) {
+	_va := make([]interface{}, len(_a2))
+	for _i := range _a2 {
+		_va[_i] = _a2[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
 
 	var r0 string
-	if rf, ok := ret.Get(0).(func(context.Context, string, string, slack.PostMessageParameters) string); ok {
-		r0 = rf(_a0, _a1, _a2, _a3)
+	if rf, ok := ret.Get(0).(func(context.Context, string, ...slack.MsgOption) string); ok {
+		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		r0 = ret.Get(0).(string)
 	}
 
 	var r1 string
-	if rf, ok := ret.Get(1).(func(context.Context, string, string, slack.PostMessageParameters) string); ok {
-		r1 = rf(_a0, _a1, _a2, _a3)
+	if rf, ok := ret.Get(1).(func(context.Context, string, ...slack.MsgOption) string); ok {
+		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Get(1).(string)
 	}
 
 	var r2 error
-	if rf, ok := ret.Get(2).(func(context.Context, string, string, slack.PostMessageParameters) error); ok {
-		r2 = rf(_a0, _a1, _a2, _a3)
+	if rf, ok := ret.Get(2).(func(context.Context, string, ...slack.MsgOption) error); ok {
+		r2 = rf(_a0, _a1, _a2...)
 	} else {
 		r2 = ret.Error(2)
 	}
 
 	return r0, r1, r2
-}
-
-// SetDebug provides a mock function with given fields: _a0
-func (_m *Client) SetDebug(_a0 bool) {
-	_m.Called(_a0)
 }
