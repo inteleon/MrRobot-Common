@@ -24,13 +24,18 @@ type Message struct {
 
 // Post posts a message to a Slack channel.
 func (m *Message) Post(ctx context.Context, channelID, text string, options ...slack.MsgOption) (string, string, error) {
-	return m.client.PostMessageContext(
-		ctx,
-		channelID,
+	options = append(
+		options,
 		slack.MsgOptionText(
 			text,
 			false,
 		),
+	)
+
+	return m.client.PostMessageContext(
+		ctx,
+		channelID,
+		options...,
 	)
 }
 
