@@ -2,8 +2,14 @@ package slack
 
 import (
 	"context"
+
 	"github.com/nlopes/slack"
 )
+
+// MessageHelper is an interface for Slack message helpers to implement.
+type MessageHelper interface {
+	Post(ctx context.Context, channelID, text string, options ...slack.MsgOption) (string, string, error)
+}
 
 // Client defines which methods are required by the Slack client.
 type Client interface {

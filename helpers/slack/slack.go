@@ -1,10 +1,38 @@
 package slack
 
 import (
+	"context"
 	"fmt"
 	"regexp"
 	"strings"
+
+	slacktypes "github.com/inteleon/MrRobot-Common/types/slack"
+	"github.com/nlopes/slack"
 )
+
+// NewMessage creates and returns a new Slack Message helper.
+func NewMessage(client slacktypes.Client) *Message {
+	return &Message{
+		client: client,
+	}
+}
+
+// Message is a Slack message helper.
+type Message struct {
+	client slacktypes.Client
+}
+
+// Post posts a message to a Slack channel.
+func (m *Message) Post(ctx context.Context, channelID, text string, options ...slack.MsgOption) (string, string, error) {
+	return m.client.PostMessageContext(
+		ctx,
+		channelID,
+		slack.MsgOptionText(
+			text,
+			false,
+		),
+	)
+}
 
 // IsCommand returns true if the message string is a direct command to the bot.
 func IsCommand(userID, msg string) bool {
