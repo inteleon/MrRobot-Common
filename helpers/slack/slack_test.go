@@ -1,7 +1,6 @@
 package slack
 
 import (
-	"strings"
 	"testing"
 )
 
@@ -43,63 +42,30 @@ func TestIsCommandFailure(t *testing.T) {
 func TestExtractCommandSuccess(t *testing.T) {
 	userID := "ABCD"
 
-	commands := []string{
+	inputs := []string{
 		"<@ABCD> list",
 		"<@ABCD> List",
-		"<@ABCD>: List",
-		"<@ABCD>List",
-		"<@ABCD>:List",
-		"<@ABCD> List <@ABCD>",
-		"<@ABCD> List <@ABCD> ",
-		"<@ABCD> List ",
-		"<@ABCD> List 	",
+		"<@ABCD> list hacker johnson",
+		"<@ABCD> list hacker johnson ",
+		"<@ABCD> list  hacker johnson ",
 	}
 
-	for _, cmd := range commands {
-		extractedCmd := ExtractCommand(userID, cmd)
-		if extractedCmd != "list" {
+	expectedCommand := "list"
+	expectedArguments := []string{
+		"",
+		"",
+		"hacker johnson",
+		"hacker johnson",
+		"hacker johnson",
+	}
+
+	for i, input := range inputs {
+		extractedCmd, extractedArgs := ExtractCommand(userID, input)
+		if extractedCmd != expectedCommand {
 			t.Error("expected", "list", "got", extractedCmd)
 		}
-	}
-}
-
-func TestExtractCommandFailure(t *testing.T) {
-	userID := "ABCD"
-
-	commands := []string{
-		"<@HAXX> list",
-		"<@HAXX> List",
-		"<@HAXX>: List",
-		"<@HAXX>List",
-		"<@HAXX>:List",
-		"<@HAXX> List <@HAXX>",
-		"<@HAXX> List <@HAXX> ",
-		"<@HAXX> List ",
-		"<@HAXX> List 	",
-	}
-
-	for _, cmd := range commands {
-		extractedCmd := ExtractCommand(userID, cmd)
-		expectedCmd := strings.TrimSpace(strings.ToLower(cmd))
-		if extractedCmd != expectedCmd {
-			t.Error("expected", expectedCmd, "got", extractedCmd)
-		}
-	}
-}
-
-func TestExtractCommandFailurePartRemoved(t *testing.T) {
-	userID := "ABCD"
-
-	commands := []string{
-		"<@HAXX> List <@ABCD>",
-		"<@HAXX> List <@ABCD> ",
-	}
-
-	expectedCmd := "<@haxx> list"
-	for _, cmd := range commands {
-		extractedCmd := ExtractCommand(userID, cmd)
-		if extractedCmd != expectedCmd {
-			t.Error("expected", expectedCmd, "got", extractedCmd)
+		if extractedArgs != expectedArguments[i] {
+			t.Error("expected", expectedArguments[i], "got", extractedArgs)
 		}
 	}
 }

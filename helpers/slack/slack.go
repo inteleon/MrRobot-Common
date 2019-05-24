@@ -50,16 +50,26 @@ func IsCommand(userID, msg string) bool {
 	)
 }
 
-// ExtractCommand extracts the direct command to the bot from the message string.
-func ExtractCommand(userID, msg string) string {
+// ExtractCommand extracts the direct command and arguments to the bot from the message string.
+func ExtractCommand(userID, msg string) (command string, arguments string) {
 	re := regexp.MustCompile(
 		fmt.Sprintf(
 			"<@%s>\\W*",
 			userID,
 		),
 	)
+	formattedStr := re.ReplaceAllString(msg, "")
+	cmdAndArgs := strings.SplitN(formattedStr, " ", 2)
+	if len(cmdAndArgs) == 0 {
+		return
+	}
 
-	return FormatCommand(re.ReplaceAllString(msg, ""))
+	command = FormatCommand(cmdAndArgs[0])
+	if len(cmdAndArgs) == 2 {
+		arguments = strings.TrimSpace(cmdAndArgs[1])
+	}
+
+	return
 }
 
 // FormatCommand trims all whitespace from the command.
